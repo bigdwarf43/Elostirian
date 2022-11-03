@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://fonts/new_dynamicfont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scenes/Treasure.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/StartScreen.gd" type="Script" id=3]
+[ext_resource path="res://music/Theme_sad_00.mp3" type="AudioStream" id=4]
+[ext_resource path="res://sfx/Select.wav" type="AudioStream" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade_out"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Transition_rect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[node name="StartScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 64.0
+margin_bottom = 64.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Treasure" parent="." instance=ExtResource( 2 )]
+position = Vector2( 32.6426, 35.1714 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 13.6177
+margin_top = 17.392
+margin_right = 53.6177
+margin_bottom = 31.392
+custom_fonts/font = ExtResource( 1 )
+text = "ELOSTIRIAN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fade_out = SubResource( 1 )
+
+[node name="Transition_rect" type="ColorRect" parent="."]
+margin_right = 64.0
+margin_bottom = 64.0
+color = Color( 0, 0, 0, 0 )
+
+[node name="Start_button" type="Button" parent="."]
+margin_left = 17.053
+margin_top = 43.2322
+margin_right = 49.053
+margin_bottom = 54.2322
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Start"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -20.0
+autoplay = true
+
+[node name="optionAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -20.0
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="pressed" from="Start_button" to="." method="_on_Start_button_pressed"]

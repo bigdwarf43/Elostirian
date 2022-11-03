@@ -1,0 +1,274 @@
+[gd_scene load_steps=41 format=2]
+
+[ext_resource path="res://textures/Player.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://textures/light_texture.png" type="Texture" id=3]
+[ext_resource path="res://sfx/Monster_2.wav" type="AudioStream" id=4]
+[ext_resource path="res://sfx/Shoot_Small.wav" type="AudioStream" id=5]
+[ext_resource path="res://sfx/Select_3.wav" type="AudioStream" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3.04313, 1.43626 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 3.22167, 3.77946 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "attack_down"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.16, 0.25, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 64, 16, 16 ), Rect2( 16, 64, 16, 16 ), Rect2( 32, 64, 16, 16 ), Rect2( 48, 64, 16, 16 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "attack_up"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.25, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 80, 16, 16 ), Rect2( 16, 80, 16, 16 ), Rect2( 32, 80, 16, 16 ), Rect2( 48, 80, 16, 16 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "hurt"
+length = 0.8
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.45, 0.65 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 96, 16, 16 ), Rect2( 16, 96, 16, 16 ), Rect2( 32, 96, 16, 16 ), Rect2( 48, 96, 16, 16 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 1.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 32, 16, 16 ), Rect2( 16, 32, 16, 16 ), Rect2( 32, 32, 16, 16 ), Rect2( 48, 32, 16, 16 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 48, 16, 16 ), Rect2( 16, 48, 16, 16 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 16, 16 ), Rect2( 16, 0, 16, 16 ), Rect2( 32, 0, 16, 16 ), Rect2( 48, 0, 16, 16 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 16, 16, 16 ), Rect2( 16, 16, 16, 16 ), Rect2( 32, 16, 16, 16 ), Rect2( 48, 16, 16, 16 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "attack_down"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "attack_up"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "hurt"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "up_idle"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "walk_anim"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "walk_up"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
+[sub_resource type="AnimationNodeStateMachine" id=33]
+states/attack_down/node = SubResource( 10 )
+states/attack_down/position = Vector2( 117, 56 )
+states/attack_up/node = SubResource( 11 )
+states/attack_up/position = Vector2( 543, 64 )
+states/hurt/node = SubResource( 12 )
+states/hurt/position = Vector2( 196, 245.667 )
+states/idle/node = SubResource( 13 )
+states/idle/position = Vector2( 457, 164 )
+states/up_idle/node = SubResource( 14 )
+states/up_idle/position = Vector2( 628, 164 )
+states/walk_anim/node = SubResource( 15 )
+states/walk_anim/position = Vector2( 368, 64 )
+states/walk_up/node = SubResource( 16 )
+states/walk_up/position = Vector2( 732, 64 )
+transitions = [ "attack_down", "idle", SubResource( 17 ), "idle", "attack_down", SubResource( 18 ), "walk_anim", "idle", SubResource( 19 ), "idle", "walk_anim", SubResource( 20 ), "walk_anim", "attack_down", SubResource( 21 ), "walk_up", "attack_up", SubResource( 22 ), "attack_up", "up_idle", SubResource( 23 ), "up_idle", "attack_up", SubResource( 24 ), "walk_up", "up_idle", SubResource( 25 ), "up_idle", "walk_up", SubResource( 26 ), "idle", "up_idle", SubResource( 27 ), "up_idle", "idle", SubResource( 28 ), "idle", "hurt", SubResource( 29 ), "hurt", "idle", SubResource( 30 ), "walk_anim", "hurt", SubResource( 31 ), "attack_down", "hurt", SubResource( 32 ) ]
+start_node = "idle"
+graph_offset = Vector2( 0, 63.7103 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=34]
+
+[node name="Player" type="KinematicBody2D"]
+collision_mask = 11
+script = ExtResource( 2 )
+
+[node name="Sword" type="Area2D" parent="."]
+position = Vector2( 5.72031, 1.33635 )
+rotation = 1.5708
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 32, 16, 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1.33635 )
+shape = SubResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 0, 1.33635 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+energy = 1.2
+mode = 3
+
+[node name="flicker_tween" type="Tween" parent="."]
+repeat = true
+playback/repeat = true
+
+[node name="sanity_tween" type="Tween" parent="."]
+
+[node name="sword_tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attack_down = SubResource( 3 )
+anims/attack_up = SubResource( 4 )
+anims/hurt = SubResource( 5 )
+anims/idle = SubResource( 6 )
+anims/up_idle = SubResource( 7 )
+anims/walk_anim = SubResource( 8 )
+anims/walk_up = SubResource( 9 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 33 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 34 )
+
+[node name="knockback_tween" type="Tween" parent="."]
+
+[node name="hurt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -20.0
+
+[node name="attack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -20.0
+
+[node name="gain_sanity" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -20.0

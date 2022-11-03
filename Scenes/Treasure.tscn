@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://textures/Treasure.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Treasure.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 3.20546
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 5.05119
+
+[sub_resource type="Animation" id=3]
+resource_name = "shine"
+length = 1.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 8, 8 ), Rect2( 8, 0, 8, 8 ), Rect2( 16, 0, 8, 8 ), Rect2( 24, 0, 8, 8 ), Rect2( 32, 0, 8, 8 ), Rect2( 40, 0, 8, 8 ), Rect2( 48, 0, 8, 8 ), Rect2( 56, 0, 8, 8 ), Rect2( 64, 0, 8, 8 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 0.9, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -1.5 ), Vector2( 0, 0 ), Vector2( 0, 1.5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.9, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.615686, 0, 0.54902, 1 ), Color( 0, 0.976471, 1, 1 ) ]
+}
+
+[node name="Treasure" type="StaticBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.948196, 0.865204, 0.93921, 1 )
+position = Vector2( 0, -0.326447 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 8, 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "shine"
+anims/shine = SubResource( 3 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

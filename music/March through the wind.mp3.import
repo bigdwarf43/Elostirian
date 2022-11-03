@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/March through the wind.mp3-f154ce7429fea0967916fc2edd77f7e6.mp3str"
+
+[deps]
+
+source_file="res://music/March through the wind.mp3"
+dest_files=[ "res://.import/March through the wind.mp3-f154ce7429fea0967916fc2edd77f7e6.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
